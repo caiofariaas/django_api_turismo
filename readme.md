@@ -1,0 +1,1 @@
+# Repositório criado para acompanhar o curso de DJANGO Rest API
