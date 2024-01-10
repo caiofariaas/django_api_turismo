@@ -3,7 +3,7 @@ from atracoes.models import Atracao
 from .serializers import AtracaoSerializer
 
 
-class AtracoesViewSets(ModelViewSet):
+class AtracaoViewSets(ModelViewSet):
     queryset = Atracao.objects.all()
     serializer_class = AtracaoSerializer
     
