@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Endereco(models.Model):
     linha1 = models.CharField(max_length=150)
