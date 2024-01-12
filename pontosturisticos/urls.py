@@ -5,6 +5,7 @@ from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
+
 from core.api.viewsets import PontoTuristicoViewSets
 from atracoes.api.viewsets import AtracaoViewSets
 from endereco.api.viewsets import EnderecoViewSets

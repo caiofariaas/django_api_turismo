@@ -11,7 +11,25 @@ class PontoTuristicoViewSets(ModelViewSet):
     
     def get_queryset(self):
         
-        return PontoTuristico.objects.filter(aprovado=True)
+        # fazendo filtragem 
+        
+        id = self.request.query_params.get('id', None)
+        nome = self.request.query_params.get('nome', None)
+        desc = self.request.query_params.get('desc', None)
+        
+        queryset = PontoTuristico.objects.all()
+        
+        if id:
+            queryset = PontoTuristico.objects.filter(id=id)
+        if nome:
+            
+            # '__iexact' faz com que a busca não seja 'case sentitive'
+            
+            queryset = queryset.PontoTuristico.filter(nome__iexact=nome)
+        if desc:
+            queryset = queryset.PontoTuristico.filter(desc__iexact=desc)
+
+        return queryset
     
     # SOBRESCRITA DE MÉTODOS PADRÕES
     
@@ -19,35 +37,34 @@ class PontoTuristicoViewSets(ModelViewSet):
     # Podemos manipular os resultados sobrescrevendo o método list()
     # ao contrario ele retorna uma lista de todos os itens
     
-    # def list(self, request, *args, **kwargs):
-    #     return Response({'teste': 123})
+    def list(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).list(request, *args, **kwargs)
     
     # Create
     
-    # def create(self, request, *args, **kwargs):
-    #     return Response({'hello': request.data['nome']})
-
+    def create(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).create(request, *args, **kwargs)
     # Delete
     # possivel fazer autenticações e verificar permissões
     
-    # def destroy(self, request, *args, **kwargs):
-    #     pass
+    def destroy(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).destroy(request, *args, **kwargs)
     
     # retrieve
     # funciona para um GET de um recurso especifico, exemplo: '/pontoturistico/4'
     
-    # def retrieve(self, request, *args, **kwargs):
-    #     pass
+    def retrieve(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).retrieve(request, *args, **kwargs)
     
     # # update
     
-    # def update(self, request, *args, **kwargs):
-    #     pass
+    def update(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).update(request, *args, **kwargs)
     
     # patch / partial_update
     
-    # def partial_update(self, request, *args, **kwargs):
-    #     pass
+    def partial_update(self, request, *args, **kwargs):
+        return super(PontoTuristicoViewSets, self).partial_update(request, *args, **kwargs)
     
     # ACTIONS
     # método para caso deseje denunciar um ponto turistico
@@ -63,3 +80,4 @@ class PontoTuristicoViewSets(ModelViewSet):
     @action(methods=['get'], detail=False)
     def teste(self, request):
         pass
+    
