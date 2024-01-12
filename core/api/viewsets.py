@@ -3,15 +3,21 @@ from core.models import PontoTuristico
 from .serializers import PontoTuristicoSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
 
 
 class PontoTuristicoViewSets(ModelViewSet):
     
     serializer_class = PontoTuristicoSerializer
     
+    # habilitando mais buscas no endpoint
+    
+    filter_backends = [SearchFilter]
+    search_fields = ['nome', 'desc']
+    
     def get_queryset(self):
         
-        # fazendo filtragem 
+        # fazendo filtragem sem django-filter
         
         id = self.request.query_params.get('id', None)
         nome = self.request.query_params.get('nome', None)
