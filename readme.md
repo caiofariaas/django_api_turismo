@@ -1,1 +1,1 @@
-# Repositório criado para acompanhar o curso de DJANGO Rest API
+## API de Pontos Turisticos utilizando conceitos de reutilização de API's/endpoints
