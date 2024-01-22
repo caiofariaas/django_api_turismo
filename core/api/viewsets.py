@@ -13,7 +13,16 @@ class PontoTuristicoViewSets(ModelViewSet):
     # habilitando mais buscas no endpoint
     
     filter_backends = [SearchFilter]
-    search_fields = ['nome', 'desc']
+    
+    # fazendo a busca pelo endereço e mudando o lockup_prefixes
+    #  lookup_prefixes = {
+    #     '^': 'istartswith',
+    #     '=': 'iexact',
+    #     '@': 'search',
+    #     '$': 'iregex',
+    # }
+    
+    search_fields = ['nome', 'desc', '^endereco__linha1']
     
     def get_queryset(self):
         
