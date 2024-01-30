@@ -4,6 +4,8 @@ from .serializers import PontoTuristicoSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
 
 
 class PontoTuristicoViewSets(ModelViewSet):
@@ -30,6 +32,25 @@ class PontoTuristicoViewSets(ModelViewSet):
     # ele identifica apenas 1 objeto
     
     # lookup_field =  'nome'
+    
+    
+    # https://www.django-rest-framework.org/api-guide/permissions/
+    
+    # 'permission_classes' permite você setar permissões para cada endPoint
+    # no caso estamos pedindo que o usuário no minimo esteja autenticado.
+    
+    # AllowAny - permitirá acesso irrestrito
+    
+    # IsAuthenticated - Vai negar acesso a qualquer usuário não autenticado
+    
+    # IsAdminUser - vai negar acesso a qualquer usuário que não tenha o 'is_staff' como 'true'
+    
+    # IsAuthenticatedOrReadOnly - permitirá que usuários autenticados executem qualquer solicitação.
+    # Solicitações para usuários não autenticados somente serão permitidas se o método de solicitação for um dos métodos “seguros”
+    
+       
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    authentication_classes = (TokenAuthentication,)
     
     def get_queryset(self):
         
