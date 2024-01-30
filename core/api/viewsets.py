@@ -49,7 +49,8 @@ class PontoTuristicoViewSets(ModelViewSet):
     # Solicitações para usuários não autenticados somente serão permitidas se o método de solicitação for um dos métodos “seguros”
     
        
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (IsAuthenticated,  )
+    
     authentication_classes = (TokenAuthentication,)
     
     def get_queryset(self):
