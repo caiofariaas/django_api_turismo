@@ -22,7 +22,14 @@ class PontoTuristicoViewSets(ModelViewSet):
     #     '$': 'iregex',
     # }
     
-    search_fields = ['nome', 'desc', '^endereco__linha1']
+    search_fields = ['^nome', '^desc', '^endereco__linha1']
+    
+    # o 'lookup_field' é o valor de busca, no caso, ele vem como padrão sendo o 'id' do item
+    # mas é possivel alterado apenas sobreescrevento!
+    # precisa ser 'UNICO' no banco de dados.
+    # ele identifica apenas 1 objeto
+    
+    # lookup_field =  'nome'
     
     def get_queryset(self):
         
