@@ -4,7 +4,7 @@ from .serializers import PontoTuristicoSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication
 
 
@@ -46,10 +46,16 @@ class PontoTuristicoViewSets(ModelViewSet):
     # IsAdminUser - vai negar acesso a qualquer usuário que não tenha o 'is_staff' como 'true'
     
     # IsAuthenticatedOrReadOnly - permitirá que usuários autenticados executem qualquer solicitação.
-    # Solicitações para usuários não autenticados somente serão permitidas se o método de solicitação for um dos métodos “seguros”
+    # Solicitações para usuários não autenticados somente serão permitidas se o método de solicitação for um dos métodos “seguros” por exemplo um 'GET'
+    # só permitira você ver as informações caso não autenticado
+    
+    # DjangoModelPermissions - Ele mostra um resultado porem não autoriza que você faça alguma ação se não tiver a permissão especifica para aquele método
+    # ou para aquela tabela
+    # O próprio django ja ve as opções que o seu backend possuem e ja cria um sistema de permissões para os usuários
+    # você precisa apenas definir para cada usuário
     
        
-    permission_classes = (IsAuthenticated,  )
+    permission_classes = (IsAuthenticatedOrReadOnly,  )
     
     authentication_classes = (TokenAuthentication, )
     
