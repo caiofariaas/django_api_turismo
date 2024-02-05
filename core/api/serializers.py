@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from core.models import PontoTuristico
 from atracoes.api.serializers import AtracaoSerializer
 from endereco.api.serializers import EnderecosSerializer
@@ -12,16 +12,25 @@ class PontoTuristicoSerializer(ModelSerializer):
     # em Pontos turisticos, ao contrario disso ele mostra apenas o ID 
     
     atracoes = AtracaoSerializer(many=True)
-    endereco = EnderecosSerializer(many=False)
+    endereco = EnderecosSerializer()
     avaliacoes = AvaliacoesSerializer(many=True)
     comentarios = ComentariosSerializer(many=True)
+    
+    descricao_completa =  SerializerMethodField()
 
     class Meta:
         model = PontoTuristico
         fields = (
             'id', 'nome', 'desc', 'aprovado', 'atracoes',
-            'comentarios', 'avaliacoes', 'endereco', 'foto'
+            'comentarios', 'avaliacoes', 'endereco', 'foto',
+            'descricao_completa', 'descricao_completa2'
             )
         
+    # SerializerMethodField - não muito utilizado 
+    # uma forma de incluir informações complementares em seu serializer
+    # utilizar @property no models
+        
+    # def get_descricao_completa(self, obj):
+    #     return '%s - %s' % (obj.nome, obj.desc)
         
     
