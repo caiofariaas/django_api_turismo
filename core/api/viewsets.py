@@ -54,8 +54,12 @@ class PontoTuristicoViewSets(ModelViewSet):
     # O próprio django ja ve as opções que o seu backend possuem e ja cria um sistema de permissões para os usuários
     # você precisa apenas definir para cada usuário
     
+    # DjangoModelPermissionsOrReadOnly
+    
+    # DjangoObjectPermissions
+    
        
-    permission_classes = (IsAuthenticatedOrReadOnly,  )
+    permission_classes = ( )
     
     authentication_classes = (TokenAuthentication, )
     
