@@ -16,14 +16,14 @@ class PontoTuristicoSerializer(ModelSerializer):
     avaliacoes = AvaliacoesSerializer(many=True)
     comentarios = ComentariosSerializer(many=True)
     
-    descricao_completa =  SerializerMethodField()
+    # descricao_completa =  SerializerMethodField()
 
     class Meta:
         model = PontoTuristico
         fields = (
             'id', 'nome', 'desc', 'aprovado', 'atracoes',
             'comentarios', 'avaliacoes', 'endereco', 'foto',
-            'descricao_completa', 'descricao_completa2'
+             'descricao_completa2'
             )
         
     # SerializerMethodField - não muito utilizado 
